@@ -14,18 +14,27 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-                // User::factory(10)->create();
+        // User::factory(10)->create();
 
         $this->call([
             RoleSeeder::class,
+            UserSeeder::class,
         ]);
 
-                $userRole = Role::where('name', 'user')->first();
+        $userRole = Role::where('name', 'user')->first();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'role_id' => $userRole->id,
+        // Hanya buat test user jika belum ada
+        if (!User::where('email', 'test@example.com')->exists()) {
+            User::factory()->create([
+                'name' => 'Test User',
+                'email' => 'test@example.com',
+                'role_id' => $userRole->id,
+            ]);
+        }
+        
+        // Jalankan KonselingSeeder
+        $this->call([
+            KonselingSeeder::class,
         ]);
     }
 }

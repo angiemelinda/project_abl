@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Konseling extends Model
 {
     use HasFactory;
-
+    
+    protected $table = 'konseling';
+    
     protected $fillable = [
         'user_id',
         'konselor_id',
@@ -19,7 +21,6 @@ class Konseling extends Model
         'nama_lengkap',
         'email',
         'nomor_telepon',
-        'topik_konseling',
         'deskripsi',
     ];
 

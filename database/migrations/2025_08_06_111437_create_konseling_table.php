@@ -10,19 +10,18 @@ class CreateKonselingTable extends Migration
     {
         Schema::create('konseling', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');      // relasi ke user yang mengajukan
-            $table->unsignedBigInteger('konselor_id');  // relasi ke konselor
+            $table->unsignedBigInteger('user_id');      
+            $table->unsignedBigInteger('konselor_id');  
             $table->string('nama_lengkap');
             $table->string('email');
             $table->string('nomor_telepon');
-            $table->text('deskripsi');  // bisa untuk isi masalah, keluhan, dll
-            $table->dateTime('jadwal')->nullable();     // default null, nanti dijadwalkan oleh konselor
+            $table->text('deskripsi');  
+            $table->dateTime('jadwal')->nullable();     
             $table->string('topik')->nullable();
             $table->enum('status', ['menunggu', 'dijadwalkan', 'selesai', 'batal'])->default('menunggu');
-            $table->text('catatan')->nullable();        // catatan hasil konseling
+            $table->text('catatan')->nullable();      
             $table->timestamps();
 
-            // opsional: foreign key constraint
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('konselor_id')->references('id')->on('users')->onDelete('cascade');
         });
